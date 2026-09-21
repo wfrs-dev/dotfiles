@@ -1,0 +1,7 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "hankertrix/bluloco-yazi:bluloco-light"
+rev = "1570591"
+hash = "90ad21e654061aee83c24cbf38a6b865"
