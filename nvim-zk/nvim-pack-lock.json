@@ -1,0 +1,20 @@
+{
+  "plugins": {
+    "fzf-lua": {
+      "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "kanso.nvim": {
+      "rev": "1afbbb449aa0254823dbe1932e3cbb51886ff9fe",
+      "src": "https://github.com/webhooked/kanso.nvim"
+    },
+    "statusline.lua": {
+      "rev": "4c7083cdd8b902ce06762861124ac4c031b2e581",
+      "src": "https://github.com/beauwilliams/statusline.lua"
+    },
+    "zk-nvim": {
+      "rev": "922134d8f95f0169bb572b09f2fa643573cb51f8",
+      "src": "https://github.com/zk-org/zk-nvim"
+    }
+  }
+}
