@@ -1,0 +1,14 @@
+alacritty;~/.config/alacritty
+clipcat;~/.config/clipcat
+conky;~/.config/conky
+dunst;~/.config/dunst
+lazygit;~/.config/lazygit
+mpd;~/.config/mpd
+nvim;~/.config/nvim
+nvim-zk;~/.config/nvim-zk
+picom;~/.config/picom
+tmux;~/.config/tmux
+user-dirs.dirs;~/.config/user-dirs.dirs
+wallpaper.jpg;~/.config/wallpaper.jpg
+wscripts;~/.config/wscripts
+yazi;~/.config/yazi

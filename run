@@ -1,0 +1,31 @@
+#!/bin/bash
+
+VERDE='\033[0;32m'
+ROJO='\033[0;31m'
+
+ARCHIVO="00-targets"
+
+if [ ! -f "$ARCHIVO" ]; then
+    echo -e "${ROJO}  El archivo '$ARCHIVO' no existe en el directorio actual.${NC}"
+    exit 1
+fi
+
+num_linea=0
+
+while IFS=';' read -r destino enlace || [ -n "$destino" ]; do
+    ((num_linea++))
+
+    linea_original="${destino};${enlace}"
+
+    destino=$(echo "$destino" | xargs)
+    enlace=$(echo "$enlace" | xargs)
+        continue
+    fi
+
+    if [ -n "$destino" ] && [ -n "$enlace" ]; then
+        ln -s "$destino" "$enlace"
+        echo -e "${VERDE} Enlace creado: '$enlace' -> '$destino'${NC}"
+    else
+        echo -e "${ROJO}  (línea $num_linea): Formato inválido en '$linea_original'${NC}"
+    fi
+done < "$ARCHIVO"
