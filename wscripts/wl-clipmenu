@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Muestra el historial del portapapeles en un menú para copiar y pegar
+
+cliphist list | wmenu -l 20 -p " > " -f 'Terminess Nerd Font Propo 9' -S '#9B0000' -m '#46FF46' -M '#333333'  | cliphist decode | wl-copy
