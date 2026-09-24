@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# 1. Obtener la lista de ventanas estructurada en JSON desde Niri
+# 2. Formatear cada ventana como: "ID: [App] Título"
+# 3. Pasar la lista a wmenu
+# 4. Extraer el ID seleccionado y enfocar la ventana en Niri
+
+selected=$(niri msg --json windows |
+    jq -r '.[] | "\(.id): [\(.app_id // "desconocido")] \(.title // "Sin título")"' |
+    wmenu -l 6 -p "  Ventanas:" -f 'IosevkaTermSlab Nerd Font Propo 10' -S '#D01792' -m '#8CC716' -M '#333333' -N '#333333')
+
+if [ -n "$selected" ]; then
+  # Extraer únicamente el ID numérico (todo lo que está antes del primer dos puntos)
+  window_id=$(echo "$selected" | cut -d':' -f1)
+
+  # Enfocar la ventana seleccionada
+  niri msg action focus-window --id "$window_id"
+fi
