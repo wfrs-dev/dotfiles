@@ -1,0 +1,125 @@
+;; Variable de estado para controlar la confirmación de apagado
+(defvar confirm_poweroff false)
+
+;; Variables del Sistema (Polled)
+(defpoll time_str :interval "1s" "date '+  %I:%M:%S %p'")
+(defpoll date_str :interval "1m" "date '+󰸘 %A, %d de %B'")
+(defpoll uptime_str :interval "1m" "uptime -p | sed 's/up //'")
+(defpoll ip_addr :interval "10s" "ip route get 1.1.1.1 2>/dev/null | awk '{print $7}' || echo 'Desconectado'")
+(defpoll cpu_temp :interval "3s" "sensors 2>/dev/null | awk '/(Tctl|Package id 0|Core 0)/ {print $4; exit}' | tr -d '+°C' || echo 'N/A'")
+(defpoll has_battery :interval "10s" "ls /sys/class/power_supply/BAT* >/dev/null 2>&1 && echo true || echo false")
+
+;; Widget Principal
+(defwidget sys-dashboard []
+  (box :class "dashboard-container" :orientation "v" :space-evenly false :spacing 16
+
+    ;; Encabezado: Hora y Fecha
+    (box :class "header-card" :orientation "v" :space-evenly false
+      (label :class "time-text" :text time_str)
+      (label :class "date-text" :text date_str))
+
+    ;; Listado Unificado de Métricas
+    (box :class "info-grid" :orientation "v" :space-evenly false :spacing 12
+
+      ;; CPU
+      (box :orientation "h" :space-evenly false :spacing 12
+        (label :class "icon cpu-icon" :text "󰍛")
+        (label :class "info-label" :text "CPU:" :hexpand true :halign "start")
+        (label :class "info-val" :text "${round(EWW_CPU.avg, 0)}%"))
+
+      ;; RAM
+      (box :orientation "h" :space-evenly false :spacing 12
+        (label :class "icon ram-icon" :text "󰘚")
+        (label :class "info-label" :text "RAM:" :hexpand true :halign "start")
+        (label :class "info-val" :text "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 1)} GB (${round(EWW_RAM.used_mem_perc, 0)}%)"))
+
+      ;; DISCO
+      (box :orientation "h" :space-evenly false :spacing 12
+        (label :class "icon disk-icon" :text "󰋊")
+        (label :class "info-label" :text "Disco:" :hexpand true :halign "start")
+        (label :class "info-val" :text "${round(EWW_DISK["/"].used_perc, 0)}%"))
+
+      ;; Separador
+      (box :class "divider")
+
+      ;; Temperatura
+      (box :orientation "h" :space-evenly false :spacing 12
+        (label :class "icon temp-icon" :text "󰔏")
+        (label :class "info-label" :text "Temperatura:" :hexpand true :halign "start")
+        (label :class "info-val" :text "${cpu_temp}°C"))
+
+      ;; Batería (Condicional)
+      (box :orientation "h" :space-evenly false :spacing 12
+           :visible has_battery
+        (label :class "icon bat-icon" :text {EWW_BATTERY.BAT0.status == "Charging" ? "󰂄" : "󰁹"})
+        (label :class "info-label" :text "Batería:" :hexpand true :halign "start")
+        (label :class "info-val" :text "${EWW_BATTERY.BAT0.capacity}% (${EWW_BATTERY.BAT0.status})"))
+
+      ;; Dirección IP
+      (box :orientation "h" :space-evenly false :spacing 12
+        (label :class "icon ip-icon" :text "󰩟")
+        (label :class "info-label" :text "IP Local:" :hexpand true :halign "start")
+        (label :class "info-val" :text ip_addr))
+
+      ;; Uptime
+      (box :orientation "h" :space-evenly false :spacing 12
+        (label :class "icon uptime-icon" :text "󰅐")
+        (label :class "info-label" :text "Uptime:" :hexpand true :halign "start")
+        (label :class "info-val" :text uptime_str))
+    )
+
+    ;; Separador antes de los botones
+    (box :class "divider")
+
+    ;; Barra de Botones Inferior
+    (box :class "action-bar" :orientation "h" :space-evenly false
+
+      ;; Izquierda: Botón para Cerrar
+      (button :class "btn btn-close"
+              :tooltip "Cerrar Panel"
+              :onclick "eww update confirm_poweroff=false && eww close sys-panel"
+        (label :text "󰅖"))
+
+      ;; Espaciador central expansivo para empujar los otros botones a la derecha
+      (box :hexpand true)
+
+      ;; Derecha: Botón Bloquear Pantalla
+      (button :class "btn btn-lock"
+              :tooltip "Bloquear Pantalla (swaylock)"
+              :onclick "swaylock"
+        (label :text "󰌾"))
+
+      ;; Derecha: Botón Apagar Equipo con Confirmación Dinámica
+      (box :class "poweroff-wrapper" :orientation "h" :space-evenly false :spacing 6
+        (button :class "btn btn-power"
+                :tooltip "Apagar Equipo"
+                :visible {!confirm_poweroff}
+                :onclick "eww update confirm_poweroff=true"
+          (label :text "󰐥"))
+
+        ;; Sub-bloque que se activa tras el primer clic
+        (box :orientation "h" :space-evenly false :spacing 6 :visible {confirm_poweroff}
+          (button :class "btn btn-confirm-yes"
+                  :tooltip "Confirmar Apagado"
+                  :onclick "poweroff"
+            (label :text "󰄬"))
+          (button :class "btn btn-confirm-no"
+                  :tooltip "Cancelar"
+                  :onclick "eww update confirm_poweroff=false"
+            (label :text "󰜺"))
+        )
+      )
+    )
+  )
+)
+
+;; Ventana Desplegable
+(defwindow sys-panel
+  :monitor 0
+  :geometry (geometry :x "20px"
+                      :y "0%"
+                      :width "300px"
+                      :height "420px"
+                      :anchor "right center")
+  :wm-ignore true
+  (sys-dashboard))

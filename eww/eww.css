@@ -1,0 +1,143 @@
+* {
+  all: unset;
+  font-family: "IosevkaTermSlab Nerd Font", "Iosevka Nerd Font", monospace;
+}
+
+.dashboard-container {
+  background-color: #1e1e2e;
+  border: 2px solid #45475a;
+  border-radius: 12px;
+  padding: 18px;
+  color: #cdd6f4;
+}
+
+/* Header */
+.header-card {
+  background-color: #181825;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.time-text {
+  font-size: 26px;
+  font-weight: bold;
+  color: #89b4fa;
+}
+
+.date-text {
+  font-size: 14px;
+  color: #a6adc8;
+}
+
+/* Separador */
+.divider {
+  min-height: 1px;
+  background-color: #45475a;
+  margin: 4px 0px;
+}
+
+/* Íconos (Tamaño mayor) */
+.icon {
+  font-size: 20px;
+}
+
+.cpu-icon    { color: #f38ba8; }
+.ram-icon    { color: #a6e3a1; }
+.disk-icon   { color: #f9e2af; }
+.temp-icon   { color: #eba0ac; }
+.bat-icon    { color: #94e2d5; }
+.ip-icon     { color: #89dceb; }
+.uptime-icon { color: #cba6f7; }
+
+/* Textos de las métricas */
+.info-label {
+  font-size: 15px;
+  color: #a6adc8;
+}
+
+.info-val {
+  font-size: 15px;
+  font-weight: bold;
+  color: #cdd6f4;
+}
+
+/* Barra de acciones e interactividad de botones */
+.action-bar {
+  padding-top: 2px;
+}
+
+.btn {
+  padding: 6px 13px 6px 10px;
+  border-radius: 8px;
+  background-color: #313244;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #45475a;
+}
+
+/* Botón Cerrar */
+.btn-close {
+  color: #f38ba8;
+}
+
+.btn-close:hover {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+
+/* Botón Bloquear */
+.btn-lock {
+  color: #f9e2af;
+  margin-right: 8px;
+}
+
+.btn-lock:hover {
+  background-color: #f9e2af;
+  color: #1e1e2e;
+}
+
+/* Botón Apagar */
+.btn-power {
+  color: #f38ba8;
+}
+
+.btn-power:hover {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+
+/* Botones de Confirmación (Sí / No) */
+.btn-confirm-yes {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+  font-weight: bold;
+}
+
+.btn-confirm-yes:hover {
+  background-color: #eb6f92;
+}
+
+.btn-confirm-no {
+  background-color: #45475a;
+  color: #cdd6f4;
+}
+
+.btn-confirm-no:hover {
+  background-color: #585b70;
+}
+
+/* Estilo para los Tooltips de GTK */
+tooltip {
+  background-color: #181825;
+  border: 1px solid #45475a;
+  border-radius: 6px;
+}
+
+tooltip label {
+  color: #cdd6f4;
+  padding: 4px 8px;
+  font-size: 13px;
+}
