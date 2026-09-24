@@ -1,0 +1,198 @@
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+     keyboard {
+        xkb {
+            layout "ldvd"
+        }
+
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwt
+        dwtp
+        natural-scroll
+    }
+
+    mouse {
+        natural-scroll
+    }
+
+    trackpoint {
+        natural-scroll
+    }
+}
+
+output "HDMI-A-1" {
+	mode "1920x1080@60"
+	scale 1.0
+	position x=0 y=0
+}
+
+output "DP-1" {
+	mode "1920x1080@60"
+	scale 1.0
+	position x=0 y=1080
+}
+
+layout {
+    gaps 6
+
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        width 2
+        active-color "#ff4646"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+
+        urgent-color "#9b0000"
+    }
+
+    shadow {
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+
+    struts {
+        // left 64
+        // right 64
+        // top 64
+        // bottom 64
+    }
+}
+
+// spawn-at-startup "waybar"
+spawn-at-startup "eww daemon"
+spawn-at-startup "dunst"
+spawn-at-startup "udiskie"
+// spawn-at-startup "kanshi"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "swaybg" "-i" "/home/walter/.config/wallpaper.png" "-m" "fill"
+
+prefer-no-csd
+
+screenshot-path "/home/walter/Screenshots/Shot_%Y-%m-%d %H-%M-%S.png"
+
+animations {}
+
+window-rule {}
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    geometry-corner-radius 5
+    clip-to-geometry true
+}
+
+binds {
+    Mod+grave { show-hotkey-overlay; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+    Mod+H hotkey-overlay-title="Run an Application" { spawn-sh "wmenu-run -f 'IosevkaTermSlab Nerd Font Propo 10' -S '#1CB4FF' -s '#333333' -m '#333333' -M '#FFB31C' -p ' Launch: '"; }
+    Mod+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+V hotkey-overlay-title="Show the Clipboard" { spawn "/home/walter/.config/wscripts/wl-clipmenu"; }
+    Mod+W hotkey-overlay-title="Select window" { spawn "/home/walter/.config/wscripts/niri-selwin"; }
+    Mod+G hotkey-overlay-title="Toggle info panel" { spawn-sh "eww open --toggle sys-panel"; }
+
+    Mod+O repeat=false { toggle-overview; }
+    Mod+Q repeat=false { close-window; }
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+    Mod+R     { focus-column-left; }
+    Mod+T     { focus-window-down; }
+    Mod+N     { focus-window-up; }
+    Mod+S     { focus-column-right; }
+    Mod+slash { focus-column-first; }
+    Mod+dollar  { focus-column-last; }
+    Mod+Ctrl+slash { move-column-to-first; }
+    Mod+Ctrl+dollar  { move-column-to-last; }
+
+
+
+    // Fallback ventana → workspace
+    Super+Alt+n  { focus-window-or-workspace-up; }
+    Super+Alt+t  { focus-window-or-workspace-down; }
+
+    // =========================
+    // MOVE — ventanas (vertical)
+    // =========================
+    Super+Shift+n  { move-window-up; }
+    Super+Shift+t  { move-window-down; }
+
+    // Ventana → workspace
+    Super+Shift+Alt+n  { move-window-up-or-to-workspace-up; }
+    Super+Shift+Alt+t  { move-window-down-or-to-workspace-down; }
+
+    // =========================
+    // MOVE — columnas (horizontal)
+    // =========================
+    Super+Shift+r  { move-column-left; }
+    Super+Shift+s  { move-column-right; }
+
+    Super+Shift+Home { move-column-to-first; }
+    Super+Shift+End  { move-column-to-last; }
+
+    // =========================
+    // MONITORES — focus
+    // =========================
+    Super+Ctrl+r  { focus-monitor-left; }
+    Super+Ctrl+s  { focus-monitor-right; }
+    Super+Ctrl+n  { focus-monitor-up; }
+    Super+Ctrl+t  { focus-monitor-down; }
+
+    // =========================
+    // MONITORES — move columnas
+    // =========================
+    Super+Ctrl+Shift+r  { move-column-to-monitor-left; }
+    Super+Ctrl+Shift+s  { move-column-to-monitor-right; }
+    Super+Ctrl+Shift+n  { move-column-to-monitor-up; }
+    Super+Ctrl+Shift+t  { move-column-to-monitor-down; }
+
+
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Plus { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Plus { set-window-height "+10%"; }
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+	// MackBookAir keys
+	XF86LaunchA { screenshot; }
+	XF86LaunchB { screenshot-screen; }
+	XF86MonBrightnessUp { spawn "/home/walter/.config/wscripts/bright screen up"; }
+	XF86MonBrightnessDown { spawn "/home/walter/.config/wscripts/bright screen down"; }
+	XF86KbdBrightnessUp { spawn "/home/walter/.config/wscripts/bright keyboard up"; }
+	XF86KbdBrightnessDown { spawn "/home/walter/.config/wscripts/bright keyboard down"; }
+
+    Ctrl+Alt+Delete { quit; }
+}
