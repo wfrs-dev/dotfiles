@@ -2,4 +2,4 @@
 
 # Muestra el historial del portapapeles en un menú para copiar y pegar
 
-cliphist list | wmenu -l 20 -p " > " -f 'Terminess Nerd Font Propo 9' -S '#9B0000' -m '#46FF46' -M '#333333'  | cliphist decode | wl-copy
+cliphist list | wmenu -l 20 -p " > " -f 'IosevkaTermSlab Nerd Font Propo 10' -S '#1793D0' -m '#8CC716' -M '#333333' -N '#333333' | cliphist decode | wl-copy
