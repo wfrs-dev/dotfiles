@@ -2,6 +2,7 @@ alacritty;~/.config/alacritty
 clipcat;~/.config/clipcat
 conky;~/.config/conky
 dunst;~/.config/dunst
+fish;~/.config/fish
 lazygit;~/.config/lazygit
 mpd;~/.config/mpd
 nvim;~/.config/nvim
