@@ -1,0 +1,35 @@
+# --- Opciones generales ---
+ignore-empty-password
+show-failed-attempts
+daemonize
+
+# --- Indicador de bloqueo ---
+indicator-caps-lock
+indicator-radius=100
+indicator-thickness=10
+
+# --- Fondo ---
+image=/home/walter/.config/swaylock/bg.png
+scaling=fill
+
+# --- Colores del círculo e indicador ---
+# Anillo en estado normal
+ring-color=89b4fa
+key-hl-color=a6e3a1
+line-color=00000000
+inside-color=181825
+
+# Anillo al verificar la contraseña
+ring-ver-color=f9e2af
+inside-ver-color=181825
+
+# Anillo al cometer un error
+ring-clear-color=f38ba8
+ring-wrong-color=f38ba8
+inside-wrong-color=313244
+text-wrong-color=f38ba8
+
+# Colores del texto
+text-color=cdd6f4
+text-clear-color=cdd6f4
+text-ver-color=f9e2af
