@@ -40,7 +40,7 @@ output "DP-1" {
 }
 
 layout {
-    gaps 6
+    gaps 3
 
     center-focused-column "never"
 
@@ -60,11 +60,11 @@ layout {
     border {
         off
 
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        width 2
+        active-color "#D01792"
+        inactive-color "#1CB4FF"
 
-        urgent-color "#9b0000"
+        urgent-color "#D01717"
     }
 
     shadow {
@@ -104,7 +104,7 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 5
+    geometry-corner-radius 0
     clip-to-geometry true
 }
 
