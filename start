@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+from pathlib import Path
+import json
+
+BaseDir = Path(__file__).parent
+
+jfile = Path(BaseDir, "00-targets.json")
+
+RED = "\033[31m"
+GREEN = "\033[32m"
+RESET = "\033[0m"
+
+def green(msg):
+    print(f"{GREEN}{msg}{RESET}")
+
+def red(msg):
+    print(f"{RED}{msg}{RESET}")
+
+if __name__ == "__main__":
+    try:
+        print(f"Reading {jfile}")
+        data = json.loads(jfile.read_text(encoding="utf-8"))
+        for item in data:
+            _from = Path(BaseDir, item["from"])
+            _to = Path(item["to"]).expanduser()
+            if not _from.exists():
+                red(f" Source file {_from} does not exist")
+                exit(1)
+            if _to.exists() and _to.is_symlink():
+                _to.unlink()
+
+            _to.symlink_to(_from)
+            green(f"  {_from} -> {_to}")
+        exit(0)
+
+    except FileNotFoundError:
+        red(" 00-targets.json not found")
+        exit(1)
+    except json.JSONDecodeError:
+        red(" 00-targets.json is not valid json")
+        exit(1)

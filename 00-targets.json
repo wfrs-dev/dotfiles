@@ -1,0 +1,66 @@
+[
+  {
+    "from": "alacritty",
+    "to": "~/.config/alacritty"
+  },
+  {
+    "from": "clipcat",
+    "to": "~/.config/clipcat"
+  },
+  {
+    "from": "conky",
+    "to": "~/.config/conky"
+  },
+  {
+    "from": "dunst",
+    "to": "~/.config/dunst"
+  },
+  {
+    "from": "fish",
+    "to": "~/.config/fish"
+  },
+  {
+    "from": "lazygit",
+    "to": "~/.config/lazygit"
+  },
+  {
+    "from": "mpd",
+    "to": "~/.config/mpd"
+  },
+  {
+    "from": "nvim",
+    "to": "~/.config/nvim"
+  },
+  {
+    "from": "nvim-zk",
+    "to": "~/.config/nvim-zk"
+  },
+  {
+    "from": "picom",
+    "to": "~/.config/picom"
+  },
+  {
+    "from": "tmux",
+    "to": "~/.config/tmux"
+  },
+  {
+    "from": "wscripts",
+    "to": "~/.config/wscripts"
+  },
+  {
+    "from": "yazi",
+    "to": "~/.config/yazi"
+  },
+  {
+    "from": "niri",
+    "to": "~/.config/niri"
+  },
+  {
+    "from": "swaylock",
+    "to": "~/.config/swaylock"
+  },
+  {
+    "from": "wallpaper.png",
+    "to": "~/.config/wallpaper.png"
+  }
+]
