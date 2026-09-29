@@ -72,7 +72,12 @@ fn.keymap('n', '<leader>gb', '<cmd>Gitsigns blame<CR>', { desc = 'Git blame' })
 vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { fg = '#80beaf', italic = true })
 
 -- kanso
-require('kanso').setup()
+require('kanso').setup({
+    italics = true,
+    bold = true,
+    commentStyle = { italic = true },
+    keywordStyle = { italic = true},
+})
 vim.cmd('colorscheme kanso-pearl')
 
 --treesitter
