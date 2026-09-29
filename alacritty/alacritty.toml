@@ -1,16 +1,15 @@
-[env]
-TERM = "xterm-256color"
-
 [font]
-size = 10.0
+size = 10.5
 [font.normal]
 family = "IosevkaTermSlab Nerd Font Propo"
 [font.bold]
-family = "IosevkaTermSlab Nerd Font Propo"
+family = "IosevkaTermSlab Nerd Font Propo Bold"
 [font.italic]
 family = "IosevkaTermSlab Nerd Font Propo"
+style = "Italic"
 [font.bold_italic]
-family = "IosevkaTermSlab Nerd Font Propo"
+family = "IosevkaTermSlab Nerd Font Propo Bold Italic"
+style = "Bold Italic"
 
 [window]
 opacity = 1.0
