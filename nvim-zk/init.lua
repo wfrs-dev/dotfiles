@@ -24,6 +24,7 @@ local keymap = vim.keymap.set
 -- local cwd = vim.getcwd
 
 vim.pack.add({
+	'https://github.com/echasnovski/mini.nvim',
 	"https://github.com/beauwilliams/statusline.lua",
 	"https://github.com/webhooked/kanso.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
@@ -236,6 +237,15 @@ autocmd("BufEnter", {
 -- ##################################################################
 -- # PLUGINS
 -- ##################################################################
+
+-- mini.nvim
+require('mini.icons').setup()
+require('mini.jump2d').setup()
+require('mini.pairs').setup()
+require('mini.splitjoin').setup()
+require('mini.completion').setup()
+require('mini.notify').setup()
+vim.notify = require('mini.notify').make_notify()
 
 -- statusline
 require("statusline").setup({
