@@ -29,6 +29,7 @@ vim.pack.add({
 	"https://github.com/webhooked/kanso.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/zk-org/zk-nvim",
+    "https://github.com/YousefHadder/markdown-plus.nvim",
 })
 
 -- ##################################################################
@@ -293,4 +294,16 @@ zk.setup({
 			filetypes = { "markdown" },
 		},
 	},
+})
+
+-- markdown-plus
+require("markdown-plus").setup({
+  keymaps = {
+    enabled = true, -- master toggle for default markdown-plus keymaps
+  },
+  table = {
+    keymaps = {
+      enabled = true, -- table feature keymaps
+    },
+  },
 })

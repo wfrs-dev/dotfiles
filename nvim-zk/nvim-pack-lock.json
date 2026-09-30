@@ -8,6 +8,14 @@
       "rev": "1afbbb449aa0254823dbe1932e3cbb51886ff9fe",
       "src": "https://github.com/webhooked/kanso.nvim"
     },
+    "markdown-plus.nvim": {
+      "rev": "89c8d538ef5d68caddf44b957378e4719811b3ca",
+      "src": "https://github.com/YousefHadder/markdown-plus.nvim"
+    },
+    "mini.nvim": {
+      "rev": "561751e839b99a4baca36b9d963166b66d2536a6",
+      "src": "https://github.com/echasnovski/mini.nvim"
+    },
     "statusline.lua": {
       "rev": "4c7083cdd8b902ce06762861124ac4c031b2e581",
       "src": "https://github.com/beauwilliams/statusline.lua"
