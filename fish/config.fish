@@ -1,8 +1,5 @@
 set -U fish_greeting ""
 
-if status is-interactive; and not set -q TMUX
-    exec tmux new-session -A -s Development
-end
 
 set -g fish_key_bindings fish_vi_key_bindings
 set -g fish_universal_variables_lock_timeout 3000
@@ -36,3 +33,24 @@ end
 
 # opencode
 fish_add_path /home/walter/.opencode/bin
+
+if test -d /home/linuxbrew/.linuxbrew
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+end
+
+
+
+# Validación instancia TMUX
+# if status is-interactive; and not set -q TMUX
+#     exec tmux new-session -A -s Development
+# end
+
+# Validación instancia Zellij
+if status is-interactive; and not set -q ZELLIJ
+    set -l sessions (zellij list-sessions -s -c 2>/dev/null)
+    if test -n "$sessions"
+        eval (zellij setup --generate-auto-start fish)
+    else
+        exec zellij
+    end
+end
