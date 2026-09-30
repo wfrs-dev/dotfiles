@@ -1,0 +1,4 @@
+*.copy
+*.txt
+fish_variable*
+*debug*
