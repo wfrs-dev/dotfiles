@@ -77,6 +77,12 @@ require('kanso').setup({
     bold = true,
     commentStyle = { italic = true },
     keywordStyle = { italic = true},
+    -- minimal = true,
+    overrides = function(colors)
+        return {
+            String = { italic = true },
+        }
+    end
 })
 vim.cmd('colorscheme kanso-pearl')
 
