@@ -1,14 +1,15 @@
 [font]
-size = 10.5
+size = 9.5
 [font.normal]
-family = "IosevkaTermSlab Nerd Font Propo"
+family = "VictorMono Nerd Font Propo Regular"
 [font.bold]
-family = "IosevkaTermSlab Nerd Font Propo Bold"
+family = "VictorMono Nerd Font Propo Regular"
+style = "Bold"
 [font.italic]
-family = "IosevkaTermSlab Nerd Font Propo"
+family = "VictorMono Nerd Font Propo"
 style = "Italic"
 [font.bold_italic]
-family = "IosevkaTermSlab Nerd Font Propo Bold Italic"
+family = "VictorMono Nerd Font Propo"
 style = "Bold Italic"
 
 [window]
