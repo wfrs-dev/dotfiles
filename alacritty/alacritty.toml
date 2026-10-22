@@ -1,9 +1,9 @@
 [font]
-size = 9.5
+size = 10.0
 [font.normal]
-family = "VictorMono Nerd Font Propo Regular"
+family = "IosevkaTermSlab Nerd Font Propo"
 [font.bold]
-family = "VictorMono Nerd Font Propo Regular"
+family = "IosevkaTermSlab Nerd Font Propo"
 style = "Bold"
 [font.italic]
 family = "VictorMono Nerd Font Propo"
@@ -40,9 +40,12 @@ magenta = "#624c83"
 cyan = "#5e857a"
 white = "#43436c"
 
+# [colors:selection]
+# background = '#c9cbd1'
+# foreground = '#14171d'
 [colors.selection]
-background = '#c9cbd1'
-foreground = '#14171d'
+background = "#f0f0f0"
+foreground = "#333333"
 
 [[colors.indexed_colors]]
 index = 16
