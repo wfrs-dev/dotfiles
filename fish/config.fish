@@ -1,15 +1,17 @@
 set -U fish_greeting ""
 
-
 set -g fish_key_bindings fish_vi_key_bindings
 set -g fish_universal_variables_lock_timeout 3000
 set -g fish_use_sqlite_for_universal_variables yes
 
+# Configurar nvm para que se use la versión LTS
+# set --universal nvm_default_version lts
+
 # setting PATH
-set -Ua fish_user_paths $HOME/go/bin \
+fish_add_path $HOME/go/bin \
     $HOME/.dotfiles/wscripts \
     $HOME/.local/share/nvm/latest/bin \
-    /usr/local/go/bin
+    $HOME/.gentle-shell/bin
 
 if type -q go
     set GOPATH (go env GOPATH)
@@ -17,8 +19,7 @@ end
 
 # Rust integration
 if not string match -q "*$HOME/.cargo/bin*" -- $PATH
-    # Prepending path in case a system-installed rustc needs to be overridden
-    set -gx PATH "$HOME/.cargo/bin" $PATH
+    fish_add_path $HOME/.cargo/bin
 end
 
 # Zoxide integration
@@ -31,26 +32,18 @@ if type -q direnv
     direnv hook fish | source
 end
 
-# opencode
-fish_add_path /home/walter/.opencode/bin
-
 if test -d /home/linuxbrew/.linuxbrew
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
 end
 
-
-
 # Validación instancia TMUX
-# if status is-interactive; and not set -q TMUX
-#     exec tmux new-session -A -s Development
-# end
-
-# Validación instancia Zellij
-if status is-interactive; and not set -q ZELLIJ
-    set -l sessions (zellij list-sessions -s -c 2>/dev/null)
-    if test -n "$sessions"
-        eval (zellij setup --generate-auto-start fish)
-    else
-        exec zellij
-    end
+if status is-interactive; and not set -q TMUX
+    exec tmux new-session -A -s Development
 end
+
+# pnpm
+set -gx PNPM_HOME '/home/walter/.local/share/pnpm'
+if test "$PATH[1]" != "$PNPM_HOME/bin"
+  set -gx PATH "$PNPM_HOME/bin" $PATH
+end
+# pnpm end
