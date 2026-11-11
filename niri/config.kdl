@@ -110,7 +110,8 @@ window-rule {
 
 binds {
     Mod+grave { show-hotkey-overlay; }
-    Mod+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+    // Mod+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: Ghostty" { spawn-sh "GTK_IM_MODULE=simple ghostty"; }
     Mod+H hotkey-overlay-title="Run an Application" { spawn-sh "wmenu-run -f 'IosevkaTermSlab Nerd Font Propo 10' -S '#1CB4FF' -s '#333333' -m '#333333' -M '#FFB31C' -p ' Launch: '"; }
     Mod+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+V hotkey-overlay-title="Show the Clipboard" { spawn "/home/walter/.config/wscripts/wl-clipmenu"; }
