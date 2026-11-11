@@ -1,9 +1,9 @@
 [font]
-size = 10.0
+size = 9.5
 [font.normal]
-family = "IosevkaTermSlab Nerd Font Propo"
+family = "VictorMono Nerd Font Propo Regular"
 [font.bold]
-family = "IosevkaTermSlab Nerd Font Propo"
+family = "VictorMono Nerd Font Propo Regular"
 style = "Bold"
 [font.italic]
 family = "VictorMono Nerd Font Propo"
@@ -15,42 +15,54 @@ style = "Bold Italic"
 [window]
 opacity = 1.0
 
-# Kanso Pearl Alacritty Colors
+# Nord Alacritty Colors
 [colors.primary]
-background = '#f2f1ef'
-foreground = '#545464'
+background = "#2e3440"
+foreground = "#d8dee9"
+dim_foreground = "#a5abb6"
+
+[colors.cursor]
+text = "#2e3440"
+cursor = "#d8dee9"
+
+[colors.vi_mode_cursor]
+text = "#2e3440"
+cursor = "#d8dee9"
+
+[colors.selection]
+text = "CellForeground"
+background = "#4c566a"
+
+[colors.search.matches]
+foreground = "CellBackground"
+background = "#88c0d0"
 
 [colors.normal]
-black = "#14171d"
-red = "#c84053"
-green = "#6f894e"
-yellow = "#77713f"
-blue = "#4d699b"
-magenta = "#b35b79"
-cyan = "#597b75"
-white = "#545464"
+black = "#3b4252"
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+magenta = "#b48ead"
+cyan = "#88c0d0"
+white = "#e5e9f0"
 
 [colors.bright]
-black = "#8a8980"
-red = "#d7474b"
-green = "#6e915f"
-yellow = "#836f4a"
-blue = "#6693bf"
-magenta = "#624c83"
-cyan = "#5e857a"
-white = "#43436c"
+black = "#4c566a"
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+magenta = "#b48ead"
+cyan = "#8fbcbb"
+white = "#eceff4"
 
-# [colors:selection]
-# background = '#c9cbd1'
-# foreground = '#14171d'
-[colors.selection]
-background = "#f0f0f0"
-foreground = "#333333"
-
-[[colors.indexed_colors]]
-index = 16
-color = '#e98a00'
-
-[[colors.indexed_colors]]
-index = 17
-color = '#e82424'
+[colors.dim]
+black = "#373e4d"
+red = "#94545d"
+green = "#809575"
+yellow = "#b29e75"
+blue = "#68809a"
+magenta = "#8c738c"
+cyan = "#6d96a5"
+white = "#aeb3bb"
