@@ -61,3 +61,46 @@ fn.usercmd('PgFormat', function()
 
 	vim.cmd(cmd)
 end, { range = true })
+
+-- Actualizar plugins
+-- USO: :PackUpdate plugin1 plugin2 ...
+fn.usercmd('PackUpdate', function(opts)
+	if #opts.fargs > 0 then
+		-- Si le pasas argumentos, actualiza solo esos plugins
+		vim.pack.update(opts.fargs)
+	else
+		-- Si no le pasas argumentos, actualiza todos los plugins
+		vim.pack.update()
+	end
+end, { nargs = '*' })
+
+local parsers = {
+	'go',
+	'lua',
+	'python',
+	'rust',
+	'javascript',
+	'typescript',
+	'json',
+	'bash',
+	'fish',
+	'html',
+	'css',
+	'sql',
+	'yaml',
+	'toml',
+	'markdown',
+}
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = parsers,
+	callback = function()
+		vim.treesitter.start()
+	end,
+})
+
+vim.api.nvim_create_user_command('TSInstallAll', function()
+	require('nvim-treesitter').install(parsers)
+end, {
+	desc = 'Install all configured Treesitter parsers',
+})
