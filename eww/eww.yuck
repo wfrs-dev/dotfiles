@@ -1,125 +1,64 @@
-;; Variable de estado para controlar la confirmación de apagado
-(defvar confirm_poweroff false)
-
-;; Variables del Sistema (Polled)
-(defpoll time_str :interval "1s" "date '+  %I:%M:%S %p'")
-(defpoll date_str :interval "1m" "date '+󰸘 %A, %d de %B'")
-(defpoll uptime_str :interval "1m" "uptime -p | sed 's/up //'")
+(defpoll time_str :interval "45s" "date '+%I:%M%p - %b %d (%A)'")
+(defpoll cpu :interval "2s" "awk '{u+=$2+$4; t+=$2+$4+$5}; END {print int(u/t*100)}' /proc/stat")
+(defpoll ram_pct :interval "3s" "free | grep Mem | awk '{printf(\"%.0f\", $3/$2 * 100.0)}'")
+(defpoll ram_used :interval "3s" "free -h | grep Mem | awk '{print $3 \" / \" $2}' | sed 's/Gi/GB/g; s/Mi/MB/g'")
+(defpoll disk_pct :interval "30s" "df / | awk 'NR==2 {print $5}' | tr -d '%'")
+(defpoll disk_used :interval "30s" "df -h / | awk 'NR==2 {print $3 \"/\" $2}' | sed 's/Gi/GB/g; s/Mi/MB/g'")
+(defpoll temp :interval "3s" "cat /sys/class/thermal/thermal_zone*/temp 2>/dev/null | awk '{print int($1/1000)}' | head -n 1")
 (defpoll ip_addr :interval "10s" "ip route get 1.1.1.1 2>/dev/null | awk '{print $7}' || echo 'Desconectado'")
-(defpoll cpu_temp :interval "3s" "sensors 2>/dev/null | awk '/(Tctl|Package id 0|Core 0)/ {print $4; exit}' | tr -d '+°C' || echo 'N/A'")
-(defpoll has_battery :interval "10s" "ls /sys/class/power_supply/BAT* >/dev/null 2>&1 && echo true || echo false")
+(defpoll uptime :interval "60s" "uptime -p | sed 's/up //'")
 
-;; Widget Principal
-(defwidget sys-dashboard []
-  (box :class "dashboard-container" :orientation "v" :space-evenly false :spacing 16
+(defwidget bar []
+  (centerbox :orientation "h"
+    (left-modules)
+    (center-modules)
+    (right-modules)
+  ))
 
-    ;; Encabezado: Hora y Fecha
-    (box :class "header-card" :orientation "v" :space-evenly false
-      (label :class "time-text" :text time_str)
-      (label :class "date-text" :text date_str))
+(defwidget left-modules []
+  (box :class "modules-left" :space-evenly false :halign "start" :spacing 15
+    (label :class "time-label" :text {"[󰥔  " + time_str + "]"})
+    (label :class "uptime-label" :text {"[󱎫  " + uptime + "]"})
+  ))
 
-    ;; Listado Unificado de Métricas
-    (box :class "info-grid" :orientation "v" :space-evenly false :spacing 12
-
-      ;; CPU
-      (box :orientation "h" :space-evenly false :spacing 12
-        (label :class "icon cpu-icon" :text "󰍛")
-        (label :class "info-label" :text "CPU:" :hexpand true :halign "start")
-        (label :class "info-val" :text "${round(EWW_CPU.avg, 0)}%"))
-
-      ;; RAM
-      (box :orientation "h" :space-evenly false :spacing 12
-        (label :class "icon ram-icon" :text "󰘚")
-        (label :class "info-label" :text "RAM:" :hexpand true :halign "start")
-        (label :class "info-val" :text "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 1)} GB (${round(EWW_RAM.used_mem_perc, 0)}%)"))
-
-      ;; DISCO
-      (box :orientation "h" :space-evenly false :spacing 12
-        (label :class "icon disk-icon" :text "󰋊")
-        (label :class "info-label" :text "Disco:" :hexpand true :halign "start")
-        (label :class "info-val" :text "${round(EWW_DISK["/"].used_perc, 0)}%"))
-
-      ;; Separador
-      (box :class "divider")
-
-      ;; Temperatura
-      (box :orientation "h" :space-evenly false :spacing 12
-        (label :class "icon temp-icon" :text "󰔏")
-        (label :class "info-label" :text "Temperatura:" :hexpand true :halign "start")
-        (label :class "info-val" :text "${cpu_temp}°C"))
-
-      ;; Batería (Condicional)
-      (box :orientation "h" :space-evenly false :spacing 12
-           :visible has_battery
-        (label :class "icon bat-icon" :text {EWW_BATTERY.BAT0.status == "Charging" ? "󰂄" : "󰁹"})
-        (label :class "info-label" :text "Batería:" :hexpand true :halign "start")
-        (label :class "info-val" :text "${EWW_BATTERY.BAT0.capacity}% (${EWW_BATTERY.BAT0.status})"))
-
-      ;; Dirección IP
-      (box :orientation "h" :space-evenly false :spacing 12
-        (label :class "icon ip-icon" :text "󰩟")
-        (label :class "info-label" :text "IP Local:" :hexpand true :halign "start")
-        (label :class "info-val" :text ip_addr))
-
-      ;; Uptime
-      (box :orientation "h" :space-evenly false :spacing 12
-        (label :class "icon uptime-icon" :text "󰅐")
-        (label :class "info-label" :text "Uptime:" :hexpand true :halign "start")
-        (label :class "info-val" :text uptime_str))
+(defwidget center-modules []
+  (box :class "modules-center" :space-evenly false :halign "center" :spacing 20
+    (box :class "stat-box" :space-evenly false :spacing 6
+      (label :class "icon" :text "[󰻠")
+      (label :text {"${round(EWW_CPU.avg, 0)}%]"})
     )
-
-    ;; Separador antes de los botones
-    (box :class "divider")
-
-    ;; Barra de Botones Inferior
-    (box :class "action-bar" :orientation "h" :space-evenly false
-
-      ;; Izquierda: Botón para Cerrar
-      (button :class "btn btn-close"
-              :tooltip "Cerrar Panel"
-              :onclick "eww update confirm_poweroff=false && eww close sys-panel"
-        (label :text "󰅖"))
-
-      ;; Espaciador central expansivo para empujar los otros botones a la derecha
-      (box :hexpand true)
-
-      ;; Derecha: Botón Bloquear Pantalla
-      (button :class "btn btn-lock"
-              :tooltip "Bloquear Pantalla (swaylock)"
-              :onclick "swaylock"
-        (label :text "󰌾"))
-
-      ;; Derecha: Botón Apagar Equipo con Confirmación Dinámica
-      (box :class "poweroff-wrapper" :orientation "h" :space-evenly false :spacing 6
-        (button :class "btn btn-power"
-                :tooltip "Apagar Equipo"
-                :visible {!confirm_poweroff}
-                :onclick "eww update confirm_poweroff=true"
-          (label :text "󰐥"))
-
-        ;; Sub-bloque que se activa tras el primer clic
-        (box :orientation "h" :space-evenly false :spacing 6 :visible {confirm_poweroff}
-          (button :class "btn btn-confirm-yes"
-                  :tooltip "Confirmar Apagado"
-                  :onclick "poweroff"
-            (label :text "󰄬"))
-          (button :class "btn btn-confirm-no"
-                  :tooltip "Cancelar"
-                  :onclick "eww update confirm_poweroff=false"
-            (label :text "󰜺"))
-        )
-      )
+    (box :class "stat-box" :space-evenly false :spacing 6
+      (label :class "icon" :text "[󰍛")
+      (label :text {"${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 2)} GB (${round(EWW_RAM.used_mem_perc, 0)}%)]"})
     )
-  )
-)
+    (box :class "stat-box" :space-evenly false :spacing 6
+      (label :class "icon" :text "[󰋊")
+      (label :text {"${disk_pct}% (${disk_used})]"})
+    )
+    (box :class "stat-box" :space-evenly false :spacing 6
+      (label :class "icon" :text "[󰔏")
+      (label :text {"${temp}°C]"})
+    )
+  ))
 
-;; Ventana Desplegable
-(defwindow sys-panel
+(defwidget right-modules []
+  (box :class "modules-right" :space-evenly false :halign "end" :spacing 15
+    (box :class "stat-box" :space-evenly false :spacing 6
+      (label :class "ip-label" :text {"[󰩟  " + ip_addr + "]"})
+    )
+    (box :class "stat-box" :space-evenly false :spacing 6
+      (label :class "ip-label" :text "[󰁹 ${EWW_BATTERY.BAT0.capacity}% (${EWW_BATTERY.BAT0.status})]"))
+  ) )
+
+(defwindow bar
   :monitor 0
-  :geometry (geometry :x "20px"
-                      :y "0%"
-                      :width "300px"
-                      :height "420px"
-                      :anchor "right center")
-  :wm-ignore true
-  (sys-dashboard))
+  :geometry (geometry :x "0%"
+                      :y "4px"
+                      :width "99%"
+                      :height "18px"
+                      :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+;;  :reserve (struts :side "bottom" :distance "36px")
+;;  :windowtype "dock"
+  (bar))

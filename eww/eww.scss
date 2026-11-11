@@ -1,0 +1,37 @@
+* {
+  font-family: "IosevkaTermSlab Nerd Font", monospace;
+  font-size: 13px;
+}
+
+window {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.modules-left, .modules-center, .modules-right {
+  background-color: #1e1e2e;
+  padding: 2px 6px;
+  margin: 0;
+  border-radius: 6px;
+  border: 1px solid #313244;
+}
+
+.stat-box {
+  color: #bac2de;
+}
+
+.icon {
+  color: #89b4fa;
+}
+
+.time-label {
+  color: #fab387;
+  font-weight: bold;
+}
+
+.uptime-label {
+  color: #a6e3a1;
+}
+
+.ip-label {
+  color: #f9e2af;
+}

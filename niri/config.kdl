@@ -87,6 +87,7 @@ spawn-at-startup "eww daemon"
 spawn-at-startup "dunst"
 spawn-at-startup "udiskie"
 // spawn-at-startup "kanshi"
+spawn-at-startup "eww open bar"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "swaybg" "-i" "/home/walter/.config/wallpaper.png" "-m" "fill"
 
@@ -116,7 +117,7 @@ binds {
     Mod+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+V hotkey-overlay-title="Show the Clipboard" { spawn "/home/walter/.config/wscripts/wl-clipmenu"; }
     Mod+W hotkey-overlay-title="Select window" { spawn "/home/walter/.config/wscripts/niri-selwin"; }
-    Mod+G hotkey-overlay-title="Toggle info panel" { spawn-sh "eww open --toggle sys-panel"; }
+    Mod+G hotkey-overlay-title="Toggle info panel" { spawn-sh "eww open --toggle bar"; }
 
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
