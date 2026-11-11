@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+
+case $1 in
+    new)
+        read -p " Nombre de la ventana: " name
+        if [ -n "$name" ]; then
+            tmux rename-window "$name"
+        fi
+        ;;
+    rename)
+        read -p " Nuevo nombre: " name
+        if [ -n "$name" ]; then
+            tmux rename-window "$name"
+        fi
+        ;;
+esac
