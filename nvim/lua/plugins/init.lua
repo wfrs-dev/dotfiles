@@ -69,29 +69,13 @@ vim.notify = require('mini.notify').make_notify()
 -- gitsigns
 require('gitsigns').setup({ current_line_blame = true })
 fn.keymap('n', '<leader>gb', '<cmd>Gitsigns blame<CR>', { desc = 'Git blame' })
-vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { fg = '#80beaf', italic = true })
+-- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { fg = '#80beaf', italic = true })
 
--- kanso
-require('kanso').setup({
-    italics = true,
-    bold = true,
-    commentStyle = { italic = true },
-    keywordStyle = { italic = true},
-    -- minimal = true,
-    overrides = function(colors)
-        return {
-            String = { italic = true },
-        }
-    end
-})
-vim.cmd('colorscheme kanso-pearl')
+vim.cmd(' colorscheme nord')
 
 --treesitter
 require('nvim-treesitter').setup({
-	highlight = {
-		enable = true,
-	},
-	indent = { enable = true },
+	install_dir = vim.fn.stdpath('data') .. '/site',
 })
 -- vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- folds
 -- vim.o.foldmethod = 'expr'

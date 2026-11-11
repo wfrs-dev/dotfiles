@@ -1,24 +1,27 @@
 gui:
   theme:
-    activeBorderColor:
-      - '#179299'
-      - bold
+    # Color de bordes para ventanas inactivas
     inactiveBorderColor:
-      - '#6c6f85'
-    optionsTextColor:
-      - '#1e66f5'
+      - "#4c566a"
+    # Color de bordes para la ventana activa
+    activeBorderColor:
+      - "#88c0d0"
+      - "bold"
+    # Color del texto de las opciones seleccionadas en listas
     selectedLineBgColor:
-      - '#ccd0da'
+      - "#4c566a"
+    # Color de las opciones de menú o pestañas seleccionadas
+    optionsTextColor:
+      - "#81a1c1"
+    # Color del título de los paneles activos
+    selectedChefColor:
+      - "#ebcb8b"
+    # Colores para información de ramas y confirmaciones (commits)
     cherryPickedCommitBgColor:
-      - '#bcc0cc'
+      - "#b48ead"
     cherryPickedCommitFgColor:
-      - '#179299'
+      - "#2e3440"
     unstagedChangesColor:
-      - '#d20f39'
+      - "#bf616a"
     defaultFgColor:
-      - '#4c4f69'
-    searchingActiveBorderColor:
-      - '#df8e1d'
-
-  authorColors:
-    '*': '#7287fd'
+      - "#d8dee9"

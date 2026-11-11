@@ -1,68 +1,84 @@
-[mgr]
-cwd = { fg = "#4D699B", bold = true }
+# Yazi Theme Configuration - Nord
 
-hovered = { fg = "#545464", bg = "#DCD7BA" }
-preview_hovered = { fg = "#545464", bg = "#DCD7BA" }
+[manager]
+cwd = { fg = "#88c0d0" }
 
-find_keyword = { fg = "#C0A36E", bold = true }
-find_position = { fg = "#957FB8", bold = true }
+# Hovered
+hovered         = { bg = "#4c566a", bold = true }
+preview_hovered = { underline = true }
 
-marker_copied   = { fg = "#76946A", bg = "#76946A" }
-marker_cut      = { fg = "#C4746E", bg = "#C4746E" }
-marker_marked   = { fg = "#7E9CD8", bg = "#7E9CD8" }
-marker_selected = { fg = "#957FB8", bg = "#957FB8" }
+# Find
+find_keyword  = { fg = "#ebcb8b", italic = true }
+find_position = { fg = "#b48ead", bg = "reset", italic = true }
 
-count_copied   = { fg = "#F2EEE3", bg = "#76946A" }
-count_cut      = { fg = "#F2EEE3", bg = "#C4746E" }
-count_selected = { fg = "#F2EEE3", bg = "#957FB8" }
+# Marker
+marker_copied   = { fg = "#a3be8c", bg = "#a3be8c" }
+marker_cut      = { fg = "#bf616a", bg = "#bf616a" }
+marker_marked   = { fg = "#81a1c1", bg = "#81a1c1" }
+marker_selected = { fg = "#ebcb8b", bg = "#ebcb8b" }
 
-border_symbol = "│"
-border_style = { fg = "#DCD7BA" }
+# Stat
+stat_normal   = { fg = "#d8dee9", bg = "#3b4252" }
+stat_sel_num  = { fg = "#2e3440", bg = "#88c0d0", bold = true }
+stat_sel_rev  = { fg = "#2e3440", bg = "#81a1c1", bold = true }
+stat_rel_num  = { fg = "#4c566a" }
 
-[mode]
-normal_main = { fg = "#545464", bg = "#DCD7BA", bold = true }
-normal_alt  = { fg = "#545464", bg = "#E9E2D0" }
-
-select_main = { fg = "#545464", bg = "#C8C093", bold = true }
-select_alt  = { fg = "#545464", bg = "#E9E2D0" }
-
-unset_main = { fg = "#F2EEE3", bg = "#C4746E", bold = true }
-unset_alt  = { fg = "#545464", bg = "#E9E2D0" }
+# Help
+help_icode   = { fg = "#ebcb8b" }
+help_args    = { fg = "#81a1c1" }
+help_footer  = { fg = "#d8dee9", bg = "#3b4252" }
 
 [status]
-overall = { fg = "#545464", bg = "#F2EEE3" }
+separator_open  = ""
+separator_close = ""
 
-progress_label  = { fg = "#545464", bold = true }
-progress_normal = { fg = "#7E9CD8", bg = "#E9E2D0" }
-progress_error  = { fg = "#C4746E", bg = "#E9E2D0" }
+mode_normal = { fg = "#2e3440", bg = "#81a1c1", bold = true }
+mode_select = { fg = "#2e3440", bg = "#a3be8c", bold = true }
+mode_unset  = { fg = "#2e3440", bg = "#bf616a", bold = true }
 
-permissions_t = { fg = "#7E9CD8" }
-permissions_r = { fg = "#76946A" }
-permissions_w = { fg = "#C0A36E" }
-permissions_x = { fg = "#C4746E" }
-permissions_s = { fg = "#957FB8" }
+progress_label  = { fg = "#d8dee9", bold = true }
+progress_normal = { fg = "#434c5e", bg = "#3b4252" }
+progress_error  = { fg = "#bf616a", bg = "#3b4252" }
+
+permissions_t = { fg = "#a3be8c" }
+permissions_r = { fg = "#ebcb8b" }
+permissions_w = { fg = "#bf616a" }
+permissions_x = { fg = "#88c0d0" }
+permissions_s = { fg = "#4c566a" }
 
 [input]
-border = { fg = "#DCD7BA" }
-selected = { bg = "#DCD7BA" }
+border   = { fg = "#88c0d0" }
+title    = { fg = "#d8dee9", bold = true }
+value    = { fg = "#d8dee9" }
+selected = { bg = "#4c566a" }
 
-[select]
-border = { fg = "#DCD7BA" }
-active = { fg = "#4D699B", bold = true }
-inactive = { fg = "#727169" }
+[completion]
+border   = { fg = "#88c0d0" }
+active   = { fg = "#2e3440", bg = "#88c0d0", bold = true }
+inactive = { fg = "#d8dee9" }
 
 [tasks]
-border = { fg = "#DCD7BA" }
-hovered = { fg = "#545464", bg = "#DCD7BA" }
+border  = { fg = "#88c0d0" }
+title   = { fg = "#d8dee9", bold = true }
+hovered = { bg = "#4c566a", bold = true }
 
 [which]
-cols = 3
+mask     = { bg = "#3b4252" }
+cand     = { fg = "#88c0d0" }
+rest     = { fg = "#a5abb6" }
+desc     = { fg = "#d8dee9" }
+separator = "  "
 
-mask = { bg = "#E9E2D0" }
-
-cand = { fg = "#4D699B", bold = true }
-rest = { fg = "#727169" }
-desc = { fg = "#545464" }
-
-separator = " → "
-separator_style = { fg = "#DCD7BA" }
+[filetype]
+rules = [
+	# Media
+	{ mime = "image/*", fg = "#a3be8c" },
+	{ mime = "{audio,video}/*", fg = "#b48ead" },
+	# Archives
+	{ mime = "application/*zip", fg = "#ebcb8b" },
+	{ mime = "application/x-*tar*", fg = "#ebcb8b" },
+	{ mime = "application/x-bzip*", fg = "#ebcb8b" },
+	{ mime = "application/x-7z-compressed", fg = "#ebcb8b" },
+	# Documents
+	{ mime = "application/pdf", fg = "#bf616a" },
+]

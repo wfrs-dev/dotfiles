@@ -17,18 +17,17 @@
 --         Walter Fabián Rodríguez Salazar
 
 vim.pack.add({
+	'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/echasnovski/mini.nvim',
 	'https://github.com/nvim-lua/plenary.nvim',
 	'https://github.com/MunifTanjim/nui.nvim',
 	'https://github.com/lewis6991/gitsigns.nvim',
-	'https://github.com/webhooked/kanso.nvim',
+	'https://github.com/shaunsingh/nord.nvim',
 	'https://github.com/ibhagwan/fzf-lua',
-	'https://github.com/neovim-treesitter/nvim-treesitter',
 	'https://github.com/stevearc/oil.nvim',
 	'https://github.com/nanozuki/tabby.nvim',
 	'https://github.com/supermaven-inc/supermaven-nvim',
 	'https://github.com/mhartington/formatter.nvim',
-	'https://github.com/neovim-treesitter/treesitter-parser-registry',
 	'https://github.com/neovim/nvim-lspconfig',
 	'https://github.com/nvim-lua/lsp-status.nvim',
 	'https://github.com/beauwilliams/statusline.lua',
