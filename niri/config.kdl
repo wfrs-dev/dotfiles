@@ -97,7 +97,11 @@ screenshot-path "/home/walter/Screenshots/Shot_%Y-%m-%d %H-%M-%S.png"
 
 animations {}
 
-window-rule {}
+window-rule {
+    match app-id="^minish$"
+    open-floating true
+    default-floating-position x=24 y=24 relative-to="top-right"
+}
 
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
@@ -119,6 +123,7 @@ binds {
     Mod+W hotkey-overlay-title="Select window" { spawn "/home/walter/.config/wscripts/niri-selwin"; }
     Mod+G hotkey-overlay-title="Toggle info panel" { spawn-sh "eww open --toggle bar"; }
 
+    Mod+M { spawn "minish"; }
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
     Mod+Left  { focus-column-left; }
